@@ -1,15 +1,26 @@
 package com.example.cursomc.resources;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.cursomc.domain.Categoria;
 
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String listar() {
-		return "ok"; 
+	public List<Categoria> listar() {
+		
+		var cat1 = new Categoria(1,"Informática");
+		var cat2 = new Categoria(2,"Escritório"); 
+		
+		List<Categoria> lista = Arrays.asList(cat1,cat2); 
+		
+		return lista; 
 	}
 }
