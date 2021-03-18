@@ -1,0 +1,3 @@
+2021-03-17 22:48:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE CATEGORIA[*]|"; SQL statement:
+DROP TABLE CATEGORIA| [42000-200]
