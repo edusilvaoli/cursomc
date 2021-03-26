@@ -42,8 +42,8 @@ public class CursomcApplication implements CommandLineRunner { // com commandlin
 		p2.getCategorias().addAll(Arrays.asList(c1,c2)); 
 		p3.getCategorias().add(c1); 
 		
-		catRep.saveAll(Arrays.asList(c1,c2)); 
-		prodRep.saveAll(Arrays.asList(p1,p2,p3)); 
+		//catRep.saveAll(Arrays.asList(c1,c2)); 
+		//prodRep.saveAll(Arrays.asList(p1,p2,p3)); 
 	}
 
 }
