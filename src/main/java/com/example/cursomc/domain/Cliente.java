@@ -9,42 +9,49 @@ import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.example.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Cliente implements Serializable{
-	
+public class Cliente implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private Long id; 
-	
-	private String nome; 
-	
-	private String email; 
-	
-	private String cpfOuCnpj; 
-	
-	private Integer tipo; 
-	
-	@OneToMany(mappedBy = "cliente")
-	private List<Endereco> enderecos = new ArrayList<>(); 
-	
-	@ElementCollection
-	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones = new HashSet<>(); //conjunto de strings
-	
-	public Cliente() { 
-		
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String nome;
+
+	private String email;
+
+	private String cpfOuCnpj;
+
+	private Integer tipo;
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Endereco> enderecos = new ArrayList<>();
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>(); // conjunto de strings
+
+	public Cliente() {
+
 	}
 
 	public Cliente(Long id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
@@ -56,8 +63,6 @@ public class Cliente implements Serializable{
 		this.tipo = tipo.getCod();
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -90,8 +95,8 @@ public class Cliente implements Serializable{
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
+	public String getTipo() {
+		return TipoCliente.toEnum(tipo).getDescricao();
 	}
 
 	public void setTipo(TipoCliente tipo) {
@@ -138,7 +143,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

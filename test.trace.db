@@ -118,3 +118,6 @@ DELETE FROM PRODUTO_CATEGORIA WHERE ID IN (4,5,6) [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-03-30 21:36:19 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ENDERECO WHEEE CLIENTE_ID[*] = 2"; SQL statement:
+SELECT * FROM ENDERECO wheee cliente_id = 2 [42000-200]
