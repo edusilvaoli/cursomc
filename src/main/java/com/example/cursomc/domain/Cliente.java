@@ -19,8 +19,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.example.cursomc.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable {
@@ -42,7 +41,7 @@ public class Cliente implements Serializable {
 
 	private Integer tipo;
 
-	@JsonManagedReference
+	//@JsonManagedReference
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -51,7 +50,8 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>(); // conjunto de strings
 	
-	@JsonBackReference
+	//@JsonBackReference - trocar jsonignore
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
 	private List<Pedido> pedidos = new ArrayList<>();
 	
