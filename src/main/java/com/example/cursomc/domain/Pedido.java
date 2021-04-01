@@ -2,6 +2,8 @@ package com.example.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -36,6 +39,9 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoEntrega;
+	
+	@OneToMany(mappedBy = "id.pedido") //tem que mapear vindo da classe itempedido do objeto pedido do atributo id(do outro lado)
+	private Set<ItemPedido> itens = new HashSet<>();  //ajuda que não terá item repetido
 
 	public Pedido() {}
 	
@@ -87,6 +93,14 @@ public class Pedido implements Serializable {
 
 	public void setEnderecoEntrega(Endereco enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 	@Override
