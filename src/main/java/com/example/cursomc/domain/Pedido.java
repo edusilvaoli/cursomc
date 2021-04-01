@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable {
@@ -27,11 +31,14 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date instante; 
 	
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido") //CascadeTypeALL - necessario - entidade transiente salvar o pedido e o pagamento, pecualidade
 	private Pagamento pagamento; 
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -40,7 +47,7 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoEntrega;
 	
-	@OneToMany(mappedBy = "id.pedido") //tem que mapear vindo da classe itempedido do objeto pedido do atributo id(do outro lado)
+	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER) //tem que mapear vindo da classe itempedido do objeto pedido do atributo id(do outro lado)
 	private Set<ItemPedido> itens = new HashSet<>();  //ajuda que não terá item repetido
 
 	public Pedido() {}

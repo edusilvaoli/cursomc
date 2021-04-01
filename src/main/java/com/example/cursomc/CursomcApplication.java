@@ -142,7 +142,7 @@ public class CursomcApplication implements CommandLineRunner { // com commandlin
 		p3.getItens().addAll(Arrays.asList(ip2));
 		
 		
-		itemRep.saveAll(Arrays.asList(ip1,ip2,ip3)); 
+		//itemRep.saveAll(Arrays.asList(ip1,ip2,ip3)); 
 	}
 
 }

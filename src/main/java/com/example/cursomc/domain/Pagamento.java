@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.example.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //nao precisa hashcode nas subclases pois elas já herdam de superclass
 
@@ -27,6 +28,7 @@ public abstract class Pagamento implements Serializable { /**
 	
 	private Integer estado;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId //garantir que mesmo id do pagamento seja igual ao do pedido

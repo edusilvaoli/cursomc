@@ -19,6 +19,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.example.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -50,6 +51,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>(); // conjunto de strings
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
 	private List<Pedido> pedidos = new ArrayList<>();
 	
